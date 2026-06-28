@@ -1,11 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1920px', // Ultra-wide monitors
+      },
+      fontSize: {
+        // Fluid typography: clamp(min, preferred, max)
+        'fluid-h1': 'clamp(2.5rem, 5vw + 1rem, 5rem)',
+        'fluid-h2': 'clamp(2rem, 4vw + 1rem, 3.5rem)',
+        'fluid-p': 'clamp(1rem, 1.5vw + 0.5rem, 1.25rem)',
+      },
       colors: {
         surya: {
           50: '#F9FAF8',  // Suryapura Sand

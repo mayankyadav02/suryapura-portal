@@ -1,16 +1,38 @@
-# React + Vite
+# Suryapura Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Suryapura Portal is a modern React + Vite experience for a fictional rural development platform. It combines storytelling, civic engagement, digital services, and transparency into a polished bilingual portal.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full project architecture, folder structure, and future extension guidance.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive hero experience with village-themed media
+- Bilingual English/Hindi content
+- Light and dark theme support
+- Smooth animated sections and scroll effects
+- Dedicated pages for initiatives, transparency, services, and connect
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- Tailwind CSS
+- Framer Motion
+- GSAP
+- React Router
+- React Helmet Async
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
