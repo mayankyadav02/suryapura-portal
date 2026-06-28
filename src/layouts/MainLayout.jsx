@@ -20,10 +20,11 @@ export default function MainLayout() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 0.35,
       smoothWheel: true,
       smoothTouch: false,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.1,
+      gestureOrientation: 'vertical',
     });
 
     let rafId;
