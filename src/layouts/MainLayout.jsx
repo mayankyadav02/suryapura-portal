@@ -22,7 +22,7 @@ export default function MainLayout() {
     const lenis = new Lenis({
       duration: 0.35,
       smoothWheel: true,
-      smoothTouch: false,
+      smoothTouch: true,
       wheelMultiplier: 1.1,
       gestureOrientation: 'vertical',
     });
