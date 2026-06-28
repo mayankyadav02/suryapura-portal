@@ -21,62 +21,37 @@ export default function LoadingScreen() {
         items-center
         justify-center
 
-        bg-gradient-to-br
-        from-surya-50
-        via-white
-        to-surya-100
-
-        dark:from-slate-950
-        dark:via-slate-900
-        dark:to-slate-950
+        bg-slate-50/60
+        dark:bg-slate-950
+        transition-colors
+        duration-300
       "
     >
-      {/* Logo Circle */}
-      <motion.div
-        animate={{
-          scale: [1, 1.08, 1],
-          rotate: [0, 2, -2, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2.5,
-          ease: 'easeInOut',
-        }}
-        className="
-          mb-6
-          flex
-          h-20
-          w-20
-          items-center
-          justify-center
-
-          rounded-full
-
-          bg-surya-600
-
-          text-4xl
-          text-white
-
-          shadow-xl
-        "
+      {/* Background Decoration */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
       >
-        ☀️
-      </motion.div>
+        <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl dark:bg-emerald-900/10" />
+        <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-slate-200/40 blur-3xl dark:bg-slate-800/40" />
+      </div>
 
-      {/* Portal Name */}
+      {/* Portal Name (Top-level focus since logo is removed) */}
       <motion.h1
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="
+          relative
+          z-10
           text-center
           font-display
-          text-3xl
+          text-4xl
           font-bold
+          tracking-tight
 
-          text-surya-700
-
-          dark:text-surya-300
+          text-slate-900
+          dark:text-white
         "
       >
         सूर्यपुरा
@@ -84,13 +59,14 @@ export default function LoadingScreen() {
 
       <p
         className="
+          relative
+          z-10
           mt-2
           text-center
           text-sm
           tracking-wide
 
-          text-ink-low
-
+          text-slate-600
           dark:text-slate-400
         "
       >
@@ -98,7 +74,7 @@ export default function LoadingScreen() {
       </p>
 
       {/* Loader */}
-      <div className="mt-10 flex gap-2">
+      <div className="relative z-10 mt-12 flex gap-2">
         {[0, 1, 2].map((item) => (
           <motion.span
             key={item}
@@ -114,8 +90,8 @@ export default function LoadingScreen() {
               h-3
               w-3
               rounded-full
-              bg-surya-600
-              dark:bg-surya-400
+              bg-emerald-600
+              dark:bg-emerald-400
             "
           />
         ))}
@@ -123,13 +99,14 @@ export default function LoadingScreen() {
 
       <p
         className="
-          mt-6
+          relative
+          z-10
+          mt-8
           text-xs
           tracking-widest
           uppercase
 
-          text-ink-low
-
+          text-slate-400
           dark:text-slate-500
         "
       >
