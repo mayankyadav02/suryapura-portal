@@ -1,179 +1,279 @@
-# Suryapura Portal Architecture
 
-## 1. Overview
+# 🏗️ Architecture
 
-Suryapura Portal is a modern React + Vite single-page experience for a fictional rural development platform. The app is designed as a premium, bilingual, responsive, and accessible marketing + civic portal that highlights governance, services, transparency, and community initiatives.
+## Project Overview
 
-## 2. Core Goals
+**Suryapura Gram Vikas Portal** is a frontend-only React + Vite application that demonstrates a modern, bilingual, responsive, and accessible rural development portal.
 
-- Deliver a polished public-facing portal experience
-- Support English and Hindi content seamlessly
-- Provide light/dark theme switching
-- Keep the UI responsive across mobile, tablet, and desktop
-- Make future expansion easy through modular components and layout-driven routes
+The project follows a **component-based architecture**, where reusable UI components, centralized global state, and route-based page organization make the application scalable and easy to maintain.
 
-## 3. Technology Stack
+---
 
-- React 19 for UI composition
-- Vite 8 for development and production builds
-- React Router for route-based navigation
-- Tailwind CSS for styling and responsive UI
-- Framer Motion + GSAP + Lenis for animation and smooth scrolling
-- React Helmet Async for SEO metadata
-- Lucide React for icons
+# High-Level Architecture
 
-## 4. Project Structure
+```text
+                    User
+                      │
+                      ▼
+               React Router DOM
+                      │
+                      ▼
+                Main Layout
+        (Navbar • Footer • Layout)
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+      Pages       Global Context   SEO
+                      │
+                      ▼
+           Reusable UI Components
+                      │
+                      ▼
+             Tailwind CSS Styling
+                      │
+                      ▼
+                  Browser UI
+```
+
+---
+
+# Folder Structure
 
 ```text
 src/
-  App.jsx
-  main.jsx
-  index.css
-  assets/
-    icons/
-    illustrations/
-    lottie/
-  components/
-    common/
-      Badge.jsx
-      Button.jsx
-      Card.jsx
-      OptimizedImage.jsx
-      SEO.jsx
-      Typography.jsx
-    layout/
-      BackToTop.jsx
-      CommandSearch.jsx
-      Container.jsx
-      Footer.jsx
-      LoadingScreen.jsx
-      Navbar.jsx
-      PageTransition.jsx
-      ScrollProgress.jsx
-      SkipLink.jsx
-  config/
-    constants.js
-  context/
-    GlobalProviders.jsx
-  hooks/
-  layouts/
-    MainLayout.jsx
-  pages/
-    Home.jsx
-    Initiatives.jsx
-    Transparency.jsx
-    Services.jsx
-    Connect.jsx
-    NotFound.jsx
-  routes/
-    AppRoutes.jsx
-  utils/
-    cn.js
-    formatters.js
+
+├── assets/            # Images & static assets
+├── components/
+│   ├── common/        # Reusable UI Components
+│   ├── home/          # Homepage Sections
+│   ├── layout/        # Navbar, Footer, Container
+│   └── navigation/    # Navigation Components
+│
+├── config/            # Global constants
+├── context/           # Theme, Language & Accessibility
+├── hooks/             # Custom React Hooks
+├── layouts/           # Main Layout
+├── pages/             # Route Pages
+├── routes/            # React Router Configuration
+├── utils/             # Utility Functions
+│
+├── App.jsx
+└── main.jsx
 ```
 
-## 5. Architectural Layers
+---
 
-### App Shell
+# Application Flow
 
-- Entry point is handled by [src/main.jsx](../src/main.jsx)
-- The app mounts the global providers and router
+```text
+Browser
 
-### Provider Layer
+↓
 
-- [src/context/GlobalProviders.jsx](../src/context/GlobalProviders.jsx) manages:
-  - theme state
-  - language state
-  - accessibility-related state
+main.jsx
 
-### Layout Layer
+↓
 
-- [src/layouts/MainLayout.jsx](../src/layouts/MainLayout.jsx) provides the shared shell:
-  - navbar
-  - main content area
-  - footer
-  - scroll behavior
-  - skip link and back-to-top
+App.jsx
 
-### Route Layer
+↓
 
-- [src/routes/AppRoutes.jsx](../src/routes/AppRoutes.jsx) maps URL paths to page components
+Global Providers
 
-### Page Layer
+↓
 
-Each page is a self-contained experience:
+React Router
 
-- Home for storytelling and hero content
-- Initiatives for developmental programs
-- Transparency for public governance data
-- Services for citizen services
-- Connect for support and contact
-- NotFound for fallback route
+↓
 
-### UI Component Layer
+Main Layout
 
-Shared components live in [src/components/common](../src/components/common) and [src/components/layout](../src/components/layout) for reuse across pages.
+↓
 
-## 6. State Management Strategy
+Page Component
 
-The project uses a lightweight architecture:
+↓
 
-- Local component state for component-level UI interactions
-- Context for app-wide state such as theme, language, and accessibility preferences
-- No backend or database layer is required for the current demo version
+Reusable Components
 
-This keeps the project simple while remaining extensible for future API integration.
+↓
 
-## 7. Theme and Localization Flow
-
-### Theme
-
-- Tailwind dark mode is driven by a root class toggle
-- Theme preference is stored in local storage
-- The application uses a consistent dark-mode surface structure across sections
-
-### Language
-
-- English and Hindi content are managed through localized objects inside page components
-- The active locale is provided via the global provider
-
-## 8. Routing Model
-
-```mermaid
-flowchart TD
-  A[Home] --> B[Initiatives]
-  A --> C[Transparency]
-  A --> D[Services]
-  A --> E[Connect]
-  B --> F[NotFound]
-  C --> F
-  D --> F
-  E --> F
+Rendered UI
 ```
 
-## 9. Performance Considerations
+---
 
-- Vite-based build pipeline for fast development and production builds
-- Chunks are split for React, animation, and UI dependencies
-- Images are used through optimized asset patterns and lazy loading where appropriate
-- Lenis improves perceived scrolling smoothness
+# Routing
 
-## 10. Future Extension Points
+The application uses **React Router DOM** with route-based navigation.
 
-The architecture is ready for future additions such as:
+Current pages:
 
-- CMS-driven content
-- real backend APIs
-- form submissions and notifications
-- analytics and tracking
-- admin dashboard for content updates
+* Home
+* Initiatives
+* Transparency
+* Services
+* Connect
+* Not Found (404)
 
-## 11. Recommended Development Pattern
+---
 
-When adding features:
+# Global State Management
 
-1. Keep page-specific logic inside the relevant page component
-2. Reuse shared components from the common/layout folders
-3. Place global behavior in context providers
-4. Keep styling consistent with Tailwind and the existing dark/light tokens
-5. Add new routes in the router configuration only
+The project uses **React Context API** to manage application-wide settings.
+
+Available contexts include:
+
+* 🌙 Theme (Light / Dark)
+* 🌐 Language (English / Hindi)
+* ♿ Accessibility Preferences
+
+These settings are shared across all pages without prop drilling.
+
+---
+
+# Component Architecture
+
+The UI is built using reusable components.
+
+### Common Components
+
+* Button
+* Card
+* Badge
+* Typography
+* SEO
+* Container
+
+### Homepage Components
+
+* Hero Section
+* Demo Showcase
+* Stats
+* Story
+* Development Pillars
+* Social Posts
+* Testimonials
+* Notice Board
+* Gallery
+* FAQ
+* Contact CTA
+
+This modular approach keeps the codebase clean and maintainable.
+
+---
+
+# Styling System
+
+The design system is powered by:
+
+* Tailwind CSS
+* Custom Color Palette
+* Shared Typography
+* Shared Components
+* Responsive Utility Classes
+
+Features include:
+
+* Mobile-First Design
+* Dark Mode
+* Consistent Spacing
+* Reusable UI Patterns
+
+---
+
+# Animations
+
+The project enhances user experience using:
+
+* Framer Motion
+* GSAP
+* Lenis Smooth Scroll
+
+Animations are lightweight and accessibility-friendly.
+
+---
+
+# Data Flow
+
+```text
+Static Data
+
+↓
+
+Page Components
+
+↓
+
+Props
+
+↓
+
+Reusable Components
+
+↓
+
+Rendered UI
+```
+
+Currently, all content is static and stored within the frontend.
+
+---
+
+# Current Architecture
+
+```
+Frontend (React + Vite)
+
+✔ React Components
+✔ Routing
+✔ Global Context
+✔ Responsive UI
+✔ SEO
+✔ Animations
+✔ Accessibility
+
+Backend
+
+✘ Not Implemented
+
+Database
+
+✘ Not Connected
+```
+
+---
+
+# Future Architecture
+
+The current structure is designed so that a backend can be integrated later without major changes.
+
+Possible future additions:
+
+* Node.js + Express API
+* MongoDB / PostgreSQL
+* Authentication
+* Admin Dashboard
+* CMS Integration
+* Dynamic Content Management
+
+---
+
+# Design Principles
+
+The project follows these principles:
+
+* Component-Based Architecture
+* Reusability
+* Separation of Concerns
+* Responsive Design
+* Accessibility First
+* Maintainability
+* Scalable Folder Structure
+* Clean Code Practices
+
+---
+
+# Summary
+
+**Suryapura Gram Vikas Portal** uses a clean and modular React architecture built around reusable components, global context, responsive layouts, and modern UI practices. The application is frontend-focused today while remaining well-structured for future backend and database integration.
